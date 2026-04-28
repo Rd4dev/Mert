@@ -16,7 +16,7 @@ public class MerchantService {
         this.merchantRepository = merchantRepository;
     }
 
-    public List<MerchantResponseDTO> getMerchants() {
+    public List<MerchantResponseDTO> getAllMerchants() {
         List<Merchant> merchants = merchantRepository.findAll();
         List<MerchantResponseDTO> merchantResponseDTOS = merchants.stream().map(merchant -> MerchantMapper.toMerchantResponseDTO(merchant)).toList();
         return merchantResponseDTOS;
