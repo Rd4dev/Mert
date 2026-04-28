@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "merchantName": "Chris",
   "storeName": "Hawkins Cookies",
-  "email": "",
+  "email": "hawkinscookies@gmail.com",
   "address": "Madrid, Spain",
   "registeredDate": "2024-02-29",
   "phoneNumber": "+384400000010"
