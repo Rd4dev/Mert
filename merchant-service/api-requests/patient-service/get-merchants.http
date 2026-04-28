@@ -1,4 +1,3 @@
 ### GET request to get all merchants
 GET http://localhost:4000/merchants
-
 ###

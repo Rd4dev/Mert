@@ -1,0 +1,14 @@
+### POST request to add new merchant
+POST http://localhost:4000/merchants
+Content-Type: application/json
+
+{
+  "merchantName": "Chris",
+  "storeName": "Hawkins Cookies",
+  "email": "",
+  "address": "Madrid, Spain",
+  "registeredDate": "2024-02-29",
+  "phoneNumber": "+384400000010"
+}
+
+###

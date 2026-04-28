@@ -2,12 +2,12 @@
 CREATE TABLE IF NOT EXISTS merchant
 (
     id              UUID PRIMARY KEY,
-    merchant_name            VARCHAR(255)        NOT NULL,
+    merchant_name   VARCHAR(255)        NOT NULL,
     store_name      VARCHAR(255)        NOT NULL,
     email           VARCHAR(255) UNIQUE NOT NULL,
     address         VARCHAR(255)        NOT NULL,
     registered_date DATE                NOT NULL,
-    phone_number    VARCHAR(15) UNIQUE  NOT NULL
+    phone_number    VARCHAR(15)         NOT NULL
 );
 
 -- Insert merchants only if they don't already exist
