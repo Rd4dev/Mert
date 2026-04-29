@@ -26,10 +26,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception) {
-
         log.warn("Email address already exists {}", exception.getMessage());
         Map<String, String> errors = new HashMap<>();
         errors.put("message", "Email address already exists");
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(MerchantNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleMerchantNotFoundException(MerchantNotFoundException exception) {
+        log.warn("Merchant Not Found {}", exception.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", "Merchant not found");
         return ResponseEntity.badRequest().body(errors);
     }
 }

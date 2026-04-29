@@ -1,0 +1,14 @@
+### PUT request to update merchant details
+PUT http://localhost:4000/merchants/423e4567-e89b-12d3-a456-426614174000
+Content-Type: application/json
+
+{
+  "merchantName": "John Carter",
+  "storeName": "John Juice",
+  "email": "john.juice@example.com",
+  "address": "Seattle, Canada",
+  "phoneNumber": "+10000000001"
+}
+
+
+###

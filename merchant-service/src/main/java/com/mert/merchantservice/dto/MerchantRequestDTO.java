@@ -1,5 +1,6 @@
 package com.mert.merchantservice.dto;
 
+import com.mert.merchantservice.dto.validators.CreateMerchantValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -16,7 +17,7 @@ public class MerchantRequestDTO {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "Registered date is required")
+    @NotBlank(groups = CreateMerchantValidationGroup.class, message = "Registered date is required")
     private String registeredDate;
 
     @NotBlank(message = "Address is required")
