@@ -1,0 +1,8 @@
+GRPC localhost:9001/BillingService/CreateBillingAccount
+
+{
+  "merchantId": "1",
+  "merchantName": "Chris",
+  "storeName": "Chris Cookies",
+  "email": "chriscookies@gmail.com"
+}
