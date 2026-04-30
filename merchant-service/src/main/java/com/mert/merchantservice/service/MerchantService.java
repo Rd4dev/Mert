@@ -5,6 +5,7 @@ import com.mert.merchantservice.dto.MerchantResponseDTO;
 import com.mert.merchantservice.exception.EmailAlreadyExistsException;
 import com.mert.merchantservice.exception.MerchantNotFoundException;
 import com.mert.merchantservice.grpc.BillingServiceGrpcClient;
+import com.mert.merchantservice.kafka.KafkaProducer;
 import com.mert.merchantservice.mapper.MerchantMapper;
 import com.mert.merchantservice.model.Merchant;
 import com.mert.merchantservice.repository.MerchantRepository;
@@ -17,10 +18,16 @@ import java.util.UUID;
 public class MerchantService {
     private MerchantRepository merchantRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
+    private final KafkaProducer kafkaProducer;
 
-    public MerchantService(MerchantRepository merchantRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
+    public MerchantService(
+            MerchantRepository merchantRepository,
+            BillingServiceGrpcClient billingServiceGrpcClient,
+            KafkaProducer kafkaProducer
+    ) {
         this.merchantRepository = merchantRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
+        this.kafkaProducer = kafkaProducer;
     }
 
     public List<MerchantResponseDTO> getAllMerchants() {
@@ -42,6 +49,8 @@ public class MerchantService {
                 newMerchant.getStoreName(),
                 newMerchant.getEmail()
         );
+
+        kafkaProducer.sendEvent(newMerchant);
 
         return MerchantMapper.toMerchantResponseDTO(newMerchant);
     }
