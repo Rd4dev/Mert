@@ -4,6 +4,7 @@ import com.mert.merchantservice.dto.MerchantRequestDTO;
 import com.mert.merchantservice.dto.MerchantResponseDTO;
 import com.mert.merchantservice.exception.EmailAlreadyExistsException;
 import com.mert.merchantservice.exception.MerchantNotFoundException;
+import com.mert.merchantservice.grpc.BillingServiceGrpcClient;
 import com.mert.merchantservice.mapper.MerchantMapper;
 import com.mert.merchantservice.model.Merchant;
 import com.mert.merchantservice.repository.MerchantRepository;
@@ -15,9 +16,11 @@ import java.util.UUID;
 @Service
 public class MerchantService {
     private MerchantRepository merchantRepository;
+    private final BillingServiceGrpcClient billingServiceGrpcClient;
 
-    public MerchantService(MerchantRepository merchantRepository) {
+    public MerchantService(MerchantRepository merchantRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
         this.merchantRepository = merchantRepository;
+        this.billingServiceGrpcClient = billingServiceGrpcClient;
     }
 
     public List<MerchantResponseDTO> getAllMerchants() {
@@ -31,7 +34,15 @@ public class MerchantService {
             throw new EmailAlreadyExistsException("A merchant with this email already exists "
                     + merchantRequestDTO.getEmail());
         }
+
         Merchant newMerchant = merchantRepository.save(MerchantMapper.toMerchant(merchantRequestDTO));
+        billingServiceGrpcClient.createBillingAccount(
+                newMerchant.getId().toString(),
+                newMerchant.getMerchantName(),
+                newMerchant.getStoreName(),
+                newMerchant.getEmail()
+        );
+
         return MerchantMapper.toMerchantResponseDTO(newMerchant);
     }
 

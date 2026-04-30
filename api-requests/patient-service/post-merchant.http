@@ -3,12 +3,12 @@ POST http://localhost:4000/merchants
 Content-Type: application/json
 
 {
-  "merchantName": "Ken",
-  "storeName": "Ken Crisps",
-  "email": "kencrips@gmail.com",
-  "address": "Chennai, India",
-  "registeredDate": "2024-03-14",
-  "phoneNumber": "+144400000010"
+  "merchantName": "Tim3",
+  "storeName": "Tim Toasts3",
+  "email": "timtoasts3@gmail.com",
+  "address": "Coimbatore, India",
+  "registeredDate": "2021-07-01",
+  "phoneNumber": "+188800000010"
 }
 
 ###
