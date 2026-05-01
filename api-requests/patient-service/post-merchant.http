@@ -3,12 +3,12 @@ POST http://localhost:4000/merchants
 Content-Type: application/json
 
 {
-  "merchantName": "Kid",
-  "storeName": "Kid Kat",
-  "email": "kidkat@gmail.com",
-  "address": "Pune, India",
-  "registeredDate": "2022-05-01",
-  "phoneNumber": "+127850000010"
+  "merchantName": "Layon",
+  "storeName": "LaysLis",
+  "email": "layonlays@gmail.com",
+  "address": "Lucknow, India",
+  "registeredDate": "2018-12-15",
+  "phoneNumber": "+13478000010"
 }
 
 ###
