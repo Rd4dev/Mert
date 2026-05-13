@@ -3,12 +3,12 @@ POST http://localhost:4000/merchants
 Content-Type: application/json
 
 {
-  "merchantName": "Layon",
-  "storeName": "LaysLis",
-  "email": "layonlays@gmail.com",
-  "address": "Lucknow, India",
-  "registeredDate": "2018-12-15",
-  "phoneNumber": "+13478000010"
+  "merchantName": "Urvil",
+  "storeName": "UrvilFlights",
+  "email": "planesofurvil@gmail.com",
+  "address": "Maharashtra, India",
+  "registeredDate": "2026-05-10",
+  "phoneNumber": "+16666460160"
 }
 
 ###

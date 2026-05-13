@@ -12,7 +12,7 @@ public class KafkaConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaConsumer.class);
 
-    @KafkaListener(topics = "merchant", groupId = "analytics-service")
+    @KafkaListener(topics = "merchant", groupId = "test-group-1")
     public void consumeEvent(byte[] event) {
         try {
             MerchantEvent merchantEvent = MerchantEvent.parseFrom(event);
