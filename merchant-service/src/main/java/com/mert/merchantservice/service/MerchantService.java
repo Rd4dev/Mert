@@ -73,7 +73,12 @@ public class MerchantService {
         return MerchantMapper.toMerchantResponseDTO(updatedMerchant);
     }
 
-    public void deleMerchant(UUID id) {
-        merchantRepository.deleteById(id);
+    public void deleteMerchant(UUID id) {
+        Merchant merchant = merchantRepository.findById(id)
+          .orElseThrow(() ->
+              new MerchantNotFoundException(
+                  "Merchant not found with ID: " + id
+              ));
+        merchantRepository.delete(merchant);
     }
 }

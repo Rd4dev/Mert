@@ -3,6 +3,7 @@ package com.mert.merchantservice.dto;
 import com.mert.merchantservice.dto.validators.CreateMerchantValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class MerchantRequestDTO {
@@ -17,13 +18,24 @@ public class MerchantRequestDTO {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(groups = CreateMerchantValidationGroup.class, message = "Registered date is required")
+    @NotBlank(
+            groups = CreateMerchantValidationGroup.class,
+            message = "Registered date is required"
+    )
+    @Pattern(
+            regexp = "^\\d{4}-\\d{2}-\\d{2}$",
+            message = "Registered date must be in yyyy-MM-dd format"
+    )
     private String registeredDate;
 
     @NotBlank(message = "Address is required")
     private String address;
 
     @NotBlank(message = "Phone Number is required")
+    @Pattern(
+            regexp = "^\\+?[0-9]{10,15}$",
+            message = "Phone number must contain 10 to 15 digits"
+    )
     private String phoneNumber;
 
     public String getMerchantName() {
