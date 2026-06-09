@@ -73,7 +73,7 @@ public class MerchantService {
         return MerchantMapper.toMerchantResponseDTO(updatedMerchant);
     }
 
-    public void deleMerchant(UUID id) {
+    public void deleteMerchant(UUID id) {
         if(id != null) throw new RuntimeException();
         Merchant merchant = merchantRepository.findById(id)
           .orElseThrow(() ->

@@ -48,7 +48,7 @@ public class MerchantController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a Merchant")
     public ResponseEntity<Void> deleteMerchant(@PathVariable UUID id) {
-        merchantService.deleMerchant(id);
+        merchantService.deleteMerchant(id);
         return ResponseEntity.noContent().build();
     }
 }
