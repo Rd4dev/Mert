@@ -74,6 +74,7 @@ public class MerchantService {
     }
 
     public void deleMerchant(UUID id) {
+        if(id != null) throw new RuntimeException();
         Merchant merchant = merchantRepository.findById(id)
           .orElseThrow(() ->
               new MerchantNotFoundException(
