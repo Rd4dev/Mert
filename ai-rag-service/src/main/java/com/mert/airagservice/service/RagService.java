@@ -1,10 +1,10 @@
 package com.mert.airagservice.service;
 
 import com.mert.airagservice.rag.CosineSimilarity;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +13,7 @@ import java.util.Map;
 public class RagService {
     private final PdfKnowledgeService pdfKnowledgeService;
     private final EmbeddingService embeddingService;
+    private List<String> chunks;
     private final Map<String, float[]> chunkEmbeddingCache = new HashMap<>();
 
     public RagService(
@@ -23,21 +24,35 @@ public class RagService {
         this.embeddingService = embeddingService;
     }
 
-    public String buildContext(String question) throws IOException {
-        List<String> chunks = pdfKnowledgeService.getPolicyChunks();
+    @PostConstruct
+    public void init() throws IOException {
+        System.out.println("Loading knowledge base...");
+
+        chunks = pdfKnowledgeService.getPolicyChunks();
+        for(String chunk: chunks) {
+            chunkEmbeddingCache.put(
+                    chunk,
+                    embeddingService.embed(chunk)
+            );
+        }
+
+        System.out.println("Loaded " + chunks.size() + " chunks");
+    }
+
+    public String buildContext(String question) {
         float[] questionVector = embeddingService.embed(question);
         List<String> topChunks = chunks.stream()
-            .sorted((a, b) -> {
-
-                float[] aVec = chunkEmbeddingCache.computeIfAbsent(a, embeddingService::embed);
-                float[] bVec = chunkEmbeddingCache.computeIfAbsent(b, embeddingService::embed);
-
-                double scoreA = CosineSimilarity.score(questionVector, aVec);
-                double scoreB = CosineSimilarity.score(questionVector, bVec);
-
-                return Double.compare(scoreB, scoreA);
-            })
+            .map(chunk -> Map.entry(
+                    chunk,
+                    CosineSimilarity.score(
+                            questionVector,
+                            chunkEmbeddingCache.get(chunk)
+                    )
+            ))
+            .sorted((a, b) ->
+                    Double.compare(b.getValue(), a.getValue()))
             .limit(3)
+            .map(Map.Entry::getKey)
             .toList();
 
         return String.join("\n", topChunks);

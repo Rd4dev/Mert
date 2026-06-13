@@ -14,21 +14,10 @@ public class AssistantController {
     private final ChatClient chatClient;
     private final RagService ragService;
 
-//    String policy = """
-//            Returns accepted within 30 days.
-//            Opened products cannot be returned.
-//            Shipping takes 3-5 business days.
-//            """;
-
     public AssistantController(ChatClient.Builder builder, RagService ragService) {
         this.chatClient = builder.build();
         this.ragService = ragService;
     }
-
-//    @GetMapping("/policy")
-//    public String policy() throws IOException {
-//        return pdfKnowledgeService.getPolicyText();
-//    }
 
     @PostMapping("/ask")
     public String ask(@RequestBody AskRequest request) throws IOException {
@@ -56,9 +45,4 @@ public class AssistantController {
         System.out.println("LATENCY ms = " + (end-start));
         return response.content();
     }
-
-//    @GetMapping("/chunks")
-//    public List<String> chunks() throws IOException {
-//        return pdfKnowledgeService.getPolicyChunks();
-//    }
 }

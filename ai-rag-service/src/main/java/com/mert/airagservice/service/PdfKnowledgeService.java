@@ -26,12 +26,4 @@ public class PdfKnowledgeService {
         }
         return chunks;
     }
-
-//    public String getPolicyText() throws IOException {
-//        ClassPathResource resource = new ClassPathResource("knowledge/merchant-refund-policy.pdf");
-//        PDDocument document = Loader.loadPDF(resource.getInputStream().readAllBytes());
-//        PDFTextStripper stripper = new PDFTextStripper();
-//
-//        return stripper.getText(document);
-//    }
 }
