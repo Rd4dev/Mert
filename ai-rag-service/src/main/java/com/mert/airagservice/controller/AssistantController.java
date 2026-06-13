@@ -33,6 +33,7 @@ public class AssistantController {
 
     @PostMapping("/ask")
     public String ask(@RequestBody AskRequest request) throws IOException {
+        long start = System.currentTimeMillis();
         String context = pdfKnowledgeService.getPolicyText();
 
         String prompt = """
@@ -49,8 +50,11 @@ public class AssistantController {
             """
             .formatted(context, request.question());
 
-        return chatClient.prompt(prompt)
-                .call()
-                .content();
+        ChatClient.CallResponseSpec response =  chatClient.prompt(prompt)
+                .call();
+        System.out.println(response.chatResponse());
+        long end = System.currentTimeMillis();
+        System.out.println("LATENCY ms = " + (end-start));
+        return response.content();
     }
 }
