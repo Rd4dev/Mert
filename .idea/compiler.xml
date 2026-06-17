@@ -10,10 +10,20 @@
         <module name="analytics-service" />
         <module name="billing-service" />
       </profile>
+      <profile name="Annotation profile for ai-rag-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="ai-rag-service" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ai-rag-service" options="-parameters" />
       <module name="analytics-service" options="-parameters" />
       <module name="billing-service" options="-parameters" />
       <module name="merchant-service" options="-parameters" />
