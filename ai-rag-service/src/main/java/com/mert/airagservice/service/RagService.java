@@ -2,6 +2,7 @@ package com.mert.airagservice.service;
 
 import com.mert.airagservice.rag.CosineSimilarity;
 import jakarta.annotation.PostConstruct;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,15 +14,19 @@ import java.util.Map;
 public class RagService {
     private final PdfKnowledgeService pdfKnowledgeService;
     private final EmbeddingService embeddingService;
+    private final ChatClient chatClient;
+
     private List<String> chunks;
     private final Map<String, float[]> chunkEmbeddingCache = new HashMap<>();
 
     public RagService(
             PdfKnowledgeService pdfKnowledgeService,
-            EmbeddingService embeddingService
+            EmbeddingService embeddingService,
+            ChatClient.Builder chatClient
     ) {
         this.pdfKnowledgeService = pdfKnowledgeService;
         this.embeddingService = embeddingService;
+        this.chatClient = chatClient.build();
     }
 
     @PostConstruct
@@ -56,5 +61,30 @@ public class RagService {
             .toList();
 
         return String.join("\n", topChunks);
+    }
+
+    public String ask(String question) {
+        long start = System.currentTimeMillis();
+        String context = buildContext(question);
+
+        String prompt = """
+            You are a merchant support assistant.
+            Answer ONLY using the provided context.
+            If the answer is not present in the context, respond exactly with:
+            "I don't have enough information to answer that."
+            
+            Context:
+            %s
+            
+            Question:
+            %s
+            """
+            .formatted(context, question);
+
+        ChatClient.CallResponseSpec response =  chatClient.prompt(prompt).call();
+        System.out.println(response.chatResponse());
+        long end = System.currentTimeMillis();
+        System.out.println("LATENCY ms = " + (end-start));
+        return response.content();
     }
 }

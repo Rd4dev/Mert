@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Service
 public class MerchantService {
-    private MerchantRepository merchantRepository;
+    private final MerchantRepository merchantRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
     private final KafkaProducer kafkaProducer;
 
