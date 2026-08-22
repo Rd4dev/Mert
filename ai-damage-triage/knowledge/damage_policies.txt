@@ -1,0 +1,22 @@
+PRODUCT DAMAGE HANDLING POLICIES
+
+Screen Damage:
+Screen cracks, shattered displays, dead pixels, or display failures should be assigned to the Hardware Team.
+
+Battery Damage:
+Battery swelling, leakage, puncture, overheating, or other battery-related damage must be assigned to the Safety Team. Battery safety issues are high priority.
+
+Water Damage:
+Products showing liquid exposure, water ingress, corrosion caused by liquid, or moisture damage should be assigned to the Hardware Team.
+
+Packaging Damage:
+Crushed boxes, torn packaging, damaged shipping containers, or packaging-only damage should be assigned to the Logistics Team.
+
+Cosmetic Damage:
+Scratches, dents, discoloration, minor surface damage, or appearance-related issues should be assigned to the Quality Team.
+
+Breakage:
+Broken ceramic, glass, plastic, or other physically fragmented products should be assigned to the Quality Team. If the product is unusable, severity should normally be HIGH.
+
+General Rule:
+If the damage type does not clearly match an existing category, assign the case to the Review Team for manual investigation.

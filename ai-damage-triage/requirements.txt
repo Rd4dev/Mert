@@ -1,0 +1,9 @@
+ollama
+langchain
+langchain-community
+langchain-ollama
+langchain-chroma
+fastapi
+uvicorn
+python-multipart
+langchain-text-splitters

@@ -1,0 +1,10 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# AI project generated files
+ai-damage-triage/uploads/
+
+# Chroma
+chroma_db/
