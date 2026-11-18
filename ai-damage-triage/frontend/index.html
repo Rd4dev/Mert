@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Damage Triage</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>AI Damage Triage</h1>
+        <p>Upload a damaged product image and let AI analyze and route the issue.</p>
+    </header>
+
+    <main>
+
+        <section class="card">
+
+            <h2>Analyze Product Damage</h2>
+
+            <div class="upload-area" id="uploadArea">
+
+                <div class="upload-icon">📷</div>
+
+                <p class="upload-title">
+                    Choose a product image
+                </p>
+
+                <p class="upload-description">
+                    JPG, JPEG or PNG
+                </p>
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/png,image/jpeg"
+                    hidden
+                >
+
+                <button
+                    type="button"
+                    id="chooseImageButton"
+                    class="secondary-button"
+                >
+                    Choose Image
+                </button>
+
+                <p id="selectedFile" class="selected-file">
+                    No image selected
+                </p>
+
+            </div>
+
+            <div id="previewContainer" class="preview-container hidden">
+                <img id="imagePreview" alt="Selected product image">
+            </div>
+
+            <button
+                type="button"
+                id="analyzeButton"
+                class="primary-button"
+                disabled
+            >
+                Analyze Damage
+            </button>
+
+            <p id="statusMessage" class="status-message"></p>
+
+        </section>
+
+
+        <section id="loadingSection" class="card hidden">
+
+            <div class="spinner"></div>
+
+            <h2>Analyzing image...</h2>
+
+            <p>
+                AI is inspecting the image and checking company policies.
+            </p>
+
+        </section>
+
+
+        <section id="resultSection" class="card hidden">
+
+            <div class="result-header">
+                <div>
+                    <h2>Damage Ticket</h2>
+                    <p id="ticketId"></p>
+                </div>
+
+                <span id="severityBadge" class="severity-badge">
+                    -
+                </span>
+            </div>
+
+            <div class="result-grid">
+
+                <div class="result-item">
+                    <span class="label">Product</span>
+                    <span id="product" class="value">-</span>
+                </div>
+
+                <div class="result-item">
+                    <span class="label">Issue</span>
+                    <span id="issue" class="value">-</span>
+                </div>
+
+                <div class="result-item">
+                    <span class="label">Assigned Team</span>
+                    <span id="assignedTeam" class="value">-</span>
+                </div>
+
+            </div>
+
+            <div class="description-section">
+
+                <h3>Description</h3>
+
+                <p id="description">
+                    -
+                </p>
+
+            </div>
+
+            <div class="reason-section">
+
+                <h3>AI Routing Reason</h3>
+
+                <p id="reason">
+                    -
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="analyzeAnotherButton"
+                class="secondary-button"
+            >
+                Analyze Another Image
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/static/app.js"></script>
+
+</body>
+</html>

@@ -1,17 +1,14 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import APIRouter, UploadFile, File
 from pathlib import Path
 
 from ai_damage import analyze_damage
 
-app = FastAPI(
-    title="AI Damage Triage",
-    description="AI-powered product damage analysis and ticket routing",
-)
+router = APIRouter()
 
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 
-@app.post("/analyze")
+@router.post("/analyze")
 async def analyze_image(image: UploadFile = File(...)):
     file_path = UPLOAD_DIR / image.filename
 
