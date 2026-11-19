@@ -7,8 +7,7 @@ def test_homepage_loads(page: Page):
 
     expect(page).to_have_title("AI Damage Triage")
 
-def test_image_upload_preview(page: Page):
-    triage_page = TriagePage(page)
+def test_image_upload_preview(triage_page):
     triage_page.open()
 
     triage_page.upload_image("images/damaged-product1.png")
